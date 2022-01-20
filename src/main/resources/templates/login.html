@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<header th:insert="/header :: header"></header>
+
+<div>
+    <h1 align="center">Вход</h1>
+    <div th:if="${param.error}">
+        Неверный логин или пароль.
+    </div>
+    <div th:if="${param.logout}">
+        Успешный выход.
+    </div>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Имя пользователя"><br>
+        <input type="password" name="password" placeholder="Пароль"><br>
+        <button  type="submit">Войти</button>
+    </form>
+</div>
+
+
+</body>
+</html>

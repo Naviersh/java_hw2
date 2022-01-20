@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сменить родителей</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+
+<header th:insert="/header :: header"></header>
+
+<div>
+    <h1>Сменить родителей</h1>
+    <div th:if="${isError}">
+        [[${errorMessage}]]
+    </div>
+    <form th:action="${'/parents/edit/' + parents.getId()}" method="post">
+        <input type="text" name="motherFullName" placeholder="Имя матери"
+               th:value="${parents.getMotherFullName()}"><br>
+        <input type="text" name="fatherFullName" placeholder="Имя отца"
+               th:value="${parents.getFatherFullname()}"><br>
+        <select name="addressId">
+            <option value="-1" th:selected="${parents.getAddress() == null}">Нет данных</option>
+            <option th:each="address : ${addresses}" th:value="${address.getId()}"
+                    th:selected="${parents.getAddress()?.getId() == address.getId()}">[[${address.getAddress()}]]
+            </option>
+        </select><br>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/><br>
+        <button type="submit">Сменить родителей</button>
+    </form>
+</div>
+
+
+</body>
+</html>

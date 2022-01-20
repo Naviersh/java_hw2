@@ -1,0 +1,25 @@
+<div th:fragment="header">
+    <div>
+        <a href="/">
+            <span class="fs-4">Школы</span>
+        </a>
+
+        <nav>
+            <a href="/register">Регистрация</a>
+            <a href="/addresses">Адреса</a>
+            <a href="/parents">Родители</a>
+        </nav>
+
+        <div sec:authorize="isAuthenticated()">
+            <p th:inline="text">Вы вошли как: [[${#httpServletRequest.remoteUser}]]</p>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Выйти"/>
+            </form>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <a href="/login">
+                <button>Войти</button>
+            </a>
+        </div>
+    </div>
+</div>
